@@ -1,0 +1,29 @@
+meta {
+  name: Create Safe
+  type: http
+  seq: 1
+}
+
+post {
+  url: https://{{IspSubDomain}}.privilegecloud.cyberark.cloud/PasswordVault/API/Safes
+  body: json
+  auth: none
+}
+
+headers {
+  Authorization: Bearer {{identityToken}}
+}
+
+body:json {
+  {
+      "numberOfDaysRetention": 0, 
+      "numberOfVersionsRetention": null, 
+      "oLACEnabled": true, 
+      "autoPurgeEnabled": true, 
+      "managingCPM": "", 
+      "safeName": "{{UseCaseAlmAppName}}", 
+      "description": "example safe for secrets scenarios", 
+      "location": ""
+  }
+  
+}

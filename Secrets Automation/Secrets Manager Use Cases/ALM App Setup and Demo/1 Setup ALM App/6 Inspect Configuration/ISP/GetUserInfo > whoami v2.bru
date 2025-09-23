@@ -1,0 +1,20 @@
+meta {
+  name: GetUserInfo > whoami v2
+  type: http
+  seq: 1
+}
+
+post {
+  url: https://{{IspTenantId}}.id.cyberark.cloud/UserMgmt/GetUserInfo
+  body: text
+  auth: none
+}
+
+headers {
+  X-CENTRIFY-NATIVE-CLIENT: true
+  Authorization: Bearer {{identityToken}}
+}
+
+tests {
+  // 
+}

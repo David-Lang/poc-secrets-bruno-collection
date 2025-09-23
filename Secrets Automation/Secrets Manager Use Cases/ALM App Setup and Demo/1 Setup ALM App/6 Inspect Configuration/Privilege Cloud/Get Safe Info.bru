@@ -1,0 +1,15 @@
+meta {
+  name: Get Safe Info
+  type: http
+  seq: 1
+}
+
+get {
+  url: https://{{IspSubDomain}}.privilegecloud.cyberark.cloud/PasswordVault/API/Safes/{{UseCaseAlmAppName}}/
+  body: json
+  auth: none
+}
+
+headers {
+  Authorization: Bearer {{identityToken}}
+}

@@ -1,0 +1,36 @@
+meta {
+  name: Create Account UnixSSHKeys account-ssh-user2
+  type: http
+  seq: 5
+}
+
+post {
+  url: https://{{IspSubDomain}}.privilegecloud.cyberark.cloud/PasswordVault/API/Accounts/
+  body: json
+  auth: none
+}
+
+headers {
+  Authorization: Bearer {{identityToken}}
+}
+
+body:json {
+  {
+    "name": "account-ssh-user2",
+    "address": "192.168.0.2",
+    "userName": "ssh-user-2",
+    "platformId": "UnixSSHKeys",
+    "safeName": "{{UseCaseAlmAppName}}",
+    "secretType": "key",
+    "secret": "KEY-VALUE-GOES-HERE!",
+    "platformAccountProperties": {},
+    "secretManagement": {
+      "automaticManagementEnabled": true,
+      "manualManagementReason": ""
+    },
+    "remoteMachinesAccess": {
+      "remoteMachines": "",
+      "accessRestrictedToRemoteMachines": true
+    }
+  }
+}

@@ -1,0 +1,49 @@
+meta {
+  name: Add Safe Member app-admins
+  type: http
+  seq: 2
+}
+
+post {
+  url: https://{{IspSubDomain}}.privilegecloud.cyberark.cloud/PasswordVault/API/Safes/{{UseCaseAlmAppName}}/Members/
+  body: json
+  auth: none
+}
+
+headers {
+  Authorization: Bearer {{identityToken}}
+}
+
+body:json {
+  {
+  "memberName":"{{UseCaseAlmAppName}}-admins",
+  "searchIn": "Vault",
+  "membershipExpirationDate":null,
+  "permissions":
+  {
+  "useAccounts":true,
+  "retrieveAccounts": true,
+  "listAccounts": true,
+  "addAccounts": true,
+  "updateAccountContent": true,
+  "updateAccountProperties": true,
+  "initiateCPMAccountManagementOperations": true,
+  "specifyNextAccountContent": true,
+  "renameAccounts": true,
+  "deleteAccounts": true,
+  "unlockAccounts": true,
+  "manageSafe": true,
+  "manageSafeMembers": true,
+  "backupSafe": true,
+  "viewAuditLog": true,
+  "viewSafeMembers": true,
+  "accessWithoutConfirmation": true,
+  "createFolders": true,
+  "deleteFolders": true,
+  "moveAccountsAndFolders": true,
+  "requestsAuthorizationLevel1": false,
+  "requestsAuthorizationLevel2": false
+  },
+  "MemberType": "Role"
+  }
+}

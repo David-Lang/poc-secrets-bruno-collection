@@ -1,0 +1,9 @@
+{
+  "version": "1",
+  "name": "Secrets Automation",
+  "type": "collection",
+  "ignore": [
+    "node_modules",
+    ".git"
+  ]
+}

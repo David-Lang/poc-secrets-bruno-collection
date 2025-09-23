@@ -1,0 +1,29 @@
+meta {
+  name: Grant Safe Entitlement
+  type: http
+  seq: 4
+}
+
+post {
+  url: https://{{IspSubDomain}}.secretsmgr.cyberark.cloud/api/policies/conjur/policy/data
+  body: text
+  auth: none
+}
+
+headers {
+  Authorization: Token token="{{conjurSessionToken}}"
+}
+
+body:text {
+  # applied to: data
+  ---
+  # Append policy 
+  
+  # Grants the safe access to host app identity
+  - !grant
+    roles:
+      - !group  vault/{{UseCaseAlmAppName}}/delegation/consumers
+    members:
+      - !host {{UseCaseAlmAppName}}/{{UseCaseAlmAppName}}-workload
+  
+}

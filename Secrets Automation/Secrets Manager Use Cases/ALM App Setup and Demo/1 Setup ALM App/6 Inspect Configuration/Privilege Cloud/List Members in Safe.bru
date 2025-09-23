@@ -1,0 +1,15 @@
+meta {
+  name: List Members in Safe
+  type: http
+  seq: 3
+}
+
+get {
+  url: https://{{IspSubDomain}}.privilegecloud.cyberark.cloud/PasswordVault/API/Safes/{{UseCaseAlmAppName}}/Members
+  body: none
+  auth: none
+}
+
+headers {
+  Authorization: Bearer {{identityToken}}
+}

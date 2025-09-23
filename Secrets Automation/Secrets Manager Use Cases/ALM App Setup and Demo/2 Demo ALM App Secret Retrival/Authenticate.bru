@@ -1,0 +1,37 @@
+meta {
+  name: Authenticate
+  type: http
+  seq: 1
+}
+
+post {
+  url: https://{{IspSubDomain}}.secretsmgr.cyberark.cloud/api/authn/conjur/host%2Fdata%2F{{UseCaseAlmAppName}}%2F{{UseCaseAlmAppName}}-workload/authenticate
+  body: text
+  auth: none
+}
+
+headers {
+  Content-Type: text/plain
+  Accept-Encoding: base64
+}
+
+body:json {
+  em8m913cs2wrx38mt8vz2vzwaqz2y2z87x16anj5ajpka552k9dn7n
+}
+
+body:text {
+  {{almAppName-workload.ApiKey}}
+}
+
+script:pre-request {
+  // 
+}
+
+tests {
+  test("Set EnVar sessionToken", function() {
+    const data = res.getBody();
+    expect(res.getStatus()).to.equal(200);
+    bru.setEnvVar("useCaseAlmAppName.sessionToken", res.getBody())
+  });
+  
+}

@@ -1,0 +1,19 @@
+meta {
+  name: List Accounts in Safe
+  type: http
+  seq: 2
+}
+
+get {
+  url: https://{{IspSubDomain}}.privilegecloud.cyberark.cloud/PasswordVault/API/Accounts?filter=safename eq {{UseCaseAlmAppName}}
+  body: none
+  auth: none
+}
+
+params:query {
+  filter: safename eq {{UseCaseAlmAppName}}
+}
+
+headers {
+  Authorization: Bearer {{identityToken}}
+}

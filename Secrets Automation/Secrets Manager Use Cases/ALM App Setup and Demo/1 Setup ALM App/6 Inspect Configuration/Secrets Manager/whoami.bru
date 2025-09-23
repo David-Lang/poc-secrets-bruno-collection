@@ -1,0 +1,19 @@
+meta {
+  name: whoami
+  type: http
+  seq: 1
+}
+
+get {
+  url: https://{{IspSubDomain}}.secretsmgr.cyberark.cloud/api/whoami
+  body: none
+  auth: none
+}
+
+headers {
+  Authorization: Token token="{{conjurSessionToken}}"
+}
+
+script:pre-request {
+  // 
+}

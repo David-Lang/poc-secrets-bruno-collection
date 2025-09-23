@@ -1,0 +1,24 @@
+meta {
+  name: Add Service User to Conjur Admin Role
+  type: http
+  seq: 3
+}
+
+post {
+  url: https://{{IspTenantId}}.id.cyberark.cloud/roles/updaterole
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+  Authorization: Bearer {{identityToken}}
+  X-IDAP-NATIVE-CLIENT: true
+}
+
+body:json {
+  {
+    "Name":"ID_SecretManagerConjurCloudAdmin",
+    "User": { "Add": ["{{serviceUserId}}"] }
+  }
+}

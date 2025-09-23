@@ -1,0 +1,50 @@
+meta {
+  name: Add Safe Member Conjur Sync
+  type: http
+  seq: 3
+}
+
+post {
+  url: https://{{IspSubDomain}}.privilegecloud.cyberark.cloud/PasswordVault/API/Safes/{{UseCaseAlmAppName}}/Members/
+  body: json
+  auth: none
+}
+
+headers {
+  Authorization: Bearer {{identityToken}}
+}
+
+body:json {
+  {
+  "memberName":"Conjur Sync",
+  "searchIn": "Vault",
+  "membershipExpirationDate":null,
+  "isReadOnly": true,
+  "permissions":
+  {
+  "useAccounts":false,
+  "retrieveAccounts": true,
+  "listAccounts": true,
+  "addAccounts": false,
+  "updateAccountContent": false,
+  "updateAccountProperties": false,
+  "initiateCPMAccountManagementOperations": false,
+  "specifyNextAccountContent": false,
+  "renameAccounts": false,
+  "deleteAccounts": false,
+  "unlockAccounts": false,
+  "manageSafe": false,
+  "manageSafeMembers": false,
+  "backupSafe": false,
+  "viewAuditLog": false,
+  "viewSafeMembers": true,
+  "accessWithoutConfirmation": true,
+  "createFolders": false,
+  "deleteFolders": false,
+  "moveAccountsAndFolders": false,
+  "requestsAuthorizationLevel1": false,
+  "requestsAuthorizationLevel2": false
+  },
+  "MemberType": "User"
+  }
+}
