@@ -1,0 +1,27 @@
+meta {
+  name: resources list workloads
+  type: http
+  seq: 3
+}
+
+get {
+  url: https://{{ConjurFqdn}}/api/resources?kind=host&account={{ConjurAccount}}
+  body: none
+  auth: none
+}
+
+params:query {
+  kind: host
+  account: {{ConjurAccount}}
+  ~search: <string>
+  ~offset: <integer>
+  ~limit: <integer>
+  ~count: <boolean>
+  ~role: <string>
+  ~acting_as: <string>
+}
+
+headers {
+  X-Request-Id: <string>
+  Authorization: Token token="{{conjurSessionToken}}"
+}

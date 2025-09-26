@@ -1,0 +1,33 @@
+meta {
+  name: Service Workload Authenticate
+  type: http
+  seq: 5
+}
+
+post {
+  url: https://{{ConjurFqdn}}/api/authn/conjur/host%2F{{ServiceWorkload}}/authenticate
+  body: text
+  auth: none
+}
+
+headers {
+  Content-Type: text/plain
+  Accept-Encoding: base64
+}
+
+body:text {
+  {{ServiceWorkloadApiKey}}
+}
+
+script:pre-request {
+  // 
+}
+
+tests {
+  test("Conjur Auth", function() {
+    const data = res.getBody();
+    expect(res.getStatus()).to.equal(200);
+    bru.setEnvVar("conjurSessionToken", res.getBody())
+  });
+  
+}

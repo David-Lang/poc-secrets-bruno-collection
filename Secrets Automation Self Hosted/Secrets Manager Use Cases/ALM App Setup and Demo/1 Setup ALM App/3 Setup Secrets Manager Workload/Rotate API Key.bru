@@ -1,0 +1,28 @@
+meta {
+  name: Rotate API Key
+  type: http
+  seq: 4
+}
+
+put {
+  url: https://{{ConjurFqdn}}/api/authn/conjur/api_key?role=host:data/{{UseCaseAlmAppName}}/{{UseCaseAlmAppName}}-workload
+  body: none
+  auth: none
+}
+
+params:query {
+  role: host:data/{{UseCaseAlmAppName}}/{{UseCaseAlmAppName}}-workload
+}
+
+headers {
+  Authorization: Token token="{{conjurSessionToken}}"
+}
+
+tests {
+  test("Conjur Auth", function() {
+    expect(res.getStatus()).to.equal(200);
+    const data = res.getBody();
+     bru.setEnvVar("almAppName-workload.ApiKey", res.getBody())
+  });
+  
+}

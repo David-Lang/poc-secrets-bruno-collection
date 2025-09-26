@@ -1,0 +1,27 @@
+meta {
+  name: resources list all
+  type: http
+  seq: 4
+}
+
+get {
+  url: https://{{ConjurFqdn}}/api/resources?kind&account={{ConjurAccount}}
+  body: none
+  auth: none
+}
+
+params:query {
+  kind: 
+  account: {{ConjurAccount}}
+  ~search: <string>
+  ~offset: <integer>
+  ~limit: <integer>
+  ~count: <boolean>
+  ~role: <string>
+  ~acting_as: <string>
+}
+
+headers {
+  X-Request-Id: <string>
+  Authorization: Token token="{{conjurSessionToken}}"
+}

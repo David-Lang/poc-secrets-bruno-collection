@@ -1,0 +1,42 @@
+meta {
+  name: Create Safe Policy
+  type: http
+  seq: 1
+}
+
+post {
+  url: https://{{ConjurFqdn}}/api/policies/conjur/policy/data
+  body: text
+  auth: none
+}
+
+headers {
+  Authorization: Token token="{{conjurSessionToken}}"
+}
+
+body:text {
+  # applied to: data
+  ---
+  # Append policy 
+  
+  - !group  
+    id: {{UseCaseAlmAppName}}-admins
+  
+  - !group vault/conjur-sync/{{UseCaseAlmAppName}}/delegation/consumers
+  
+  - !variable 
+    id: vault/conjur-sync/{{UseCaseAlmAppName}}/account1/username
+    owner: !group /data/{{UseCaseAlmAppName}}-admins
+  
+  - !variable 
+    id: vault/conjur-sync/{{UseCaseAlmAppName}}/account1/password
+    owner: !group /data/{{UseCaseAlmAppName}}-admins
+    
+  - !permit
+    role: !group vault/conjur-sync/{{UseCaseAlmAppName}}/delegation/consumers
+    privileges: [ read, execute ]
+    resource:
+      - !variable vault/conjur-sync/{{UseCaseAlmAppName}}/account1/username
+      - !variable vault/conjur-sync/{{UseCaseAlmAppName}}/account1/password
+  
+}

@@ -1,0 +1,27 @@
+meta {
+  name: Create Workload
+  type: http
+  seq: 2
+}
+
+post {
+  url: https://{{ConjurFqdn}}/api/policies/conjur/policy/data/{{UseCaseAlmAppName}}
+  body: text
+  auth: none
+}
+
+headers {
+  Authorization: Token token="{{conjurSessionToken}}"
+}
+
+body:text {
+  # applied to: data/{{UseCaseAlmAppName}}
+  ---
+  # Append policy 
+  
+  - !host
+    id: {{UseCaseAlmAppName}}-workload
+    annotations:
+      authn/api-key: true
+  
+}
