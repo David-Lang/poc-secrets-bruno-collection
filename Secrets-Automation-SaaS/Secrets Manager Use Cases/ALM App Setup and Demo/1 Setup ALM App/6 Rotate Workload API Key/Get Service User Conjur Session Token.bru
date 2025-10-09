@@ -1,0 +1,29 @@
+meta {
+  name: Get Service User Conjur Session Token
+  type: http
+  seq: 2
+}
+
+post {
+  url: https://{{IspSubDomain}}.secretsmgr.cyberark.cloud/api/authn-oidc/cyberark/conjur/authenticate
+  body: formUrlEncoded
+  auth: none
+}
+
+headers {
+  Accept-Encoding: base64
+  ~Content-Type: text/plain
+}
+
+body:form-urlencoded {
+  id_token: {{identityToken}}
+}
+
+tests {
+  test("Conjur Auth", function() {
+    const data = res.getBody();
+    expect(res.getStatus()).to.equal(200);
+    bru.setEnvVar("conjurSessionToken", res.getBody())
+  });
+  
+}
