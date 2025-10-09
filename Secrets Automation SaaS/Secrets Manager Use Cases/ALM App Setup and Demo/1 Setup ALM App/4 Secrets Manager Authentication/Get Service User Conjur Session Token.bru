@@ -19,6 +19,23 @@ body:form-urlencoded {
   id_token: {{identityToken}}
 }
 
+script:pre-request {
+  // Get the value of the environment variable
+  const token = bru.getEnvVar("conjurSessionToken");
+  
+  // Check if it's empty, undefined, or null
+  if (!token || token.trim() === "") {
+    console.log("conjurSessionToken is empty — waiting 60 seconds for ISP updates to occur...");
+    
+    // Sleep function (Bruno supports async/await)
+    await new Promise(resolve => setTimeout(resolve, 60000));
+  
+    console.log("Resuming after 60 seconds wait...");
+  } else {
+    console.log("conjurSessionToken is set — proceeding immediately.");
+  }
+}
+
 tests {
   test("Conjur Auth", function() {
     const data = res.getBody();

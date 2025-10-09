@@ -20,10 +20,11 @@
 *.secret.*
 *.secrets.*
 
-
 # Files for specific POCs
 poc-*
 
 # All filed under folders
 poc/*
 
+# Do not update the default env file
+tenant.env.bru
