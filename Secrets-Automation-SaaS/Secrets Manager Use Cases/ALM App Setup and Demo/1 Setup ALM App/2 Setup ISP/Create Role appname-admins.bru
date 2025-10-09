@@ -1,0 +1,49 @@
+meta {
+  name: Create Role appname-admins
+  type: http
+  seq: 4
+}
+
+post {
+  url: https://{{IspTenantId}}.id.cyberark.cloud/Roles/StoreRole
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+  Authorization: Bearer {{identityToken}}
+}
+
+body:json {
+  {
+    "Description": "App Admins",
+    "Name": "{{UseCaseAlmAppName}}-admins"
+  }
+}
+
+script:pre-request {
+  // Get the current value of the variable
+  const currentAppName = bru.getEnvVar("UseCaseAlmAppName");
+  
+  // Generate a random 4-character alphanumeric string
+  const randomSuffix = Math.random().toString(36).substring(4, 8).toUpperCase();
+  
+  // Append the suffix to the existing name
+  const newAppName = `${currentAppName}-${randomSuffix}`;
+  
+  // Save it back to the variable
+  bru.setEnvVar("UseCaseAlmAppName", newAppName);
+  
+  // Optional: print for debug
+  console.log("Updated UseCaseAlmAppName:", newAppName);
+  
+}
+
+tests {
+  test("Set EnvVar: almAppName.RoleRowKey", function() {
+    const data = res.getBody();
+    expect(res.getStatus()).to.equal(200);
+    bru.setEnvVar("almAppName.RoleRowKey", res.body.Result._RowKey)
+  });
+}

@@ -27,4 +27,7 @@ poc-*
 poc/*
 
 # Do not update the default env file
+# git control cmds to toggle
+# git update-index --assume-unchanged path/to/your/file
+# git update-index --no-assume-unchanged path/to/your/file
 tenant.env.bru
