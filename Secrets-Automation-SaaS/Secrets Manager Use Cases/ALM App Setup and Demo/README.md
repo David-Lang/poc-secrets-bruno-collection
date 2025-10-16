@@ -44,9 +44,9 @@ The design emphasizes visibility into each step of the process, so users can eas
 ## Workflow
 
 Open the collection in Bruno
-** This collection needs to have **Bruno developer settings enabled** to allow for dynamic variable setting and session token collection to work automatically.  
+This collection needs to have **Bruno developer settings enabled** to allow for dynamic variable setting and session token collection to work automatically.  
 
-To Bruno collection Environment variables need to be updated with the following information that can be collected from the SaaS Platform:
+Update the below Bruno collection Environment variables with the following information that can be collected from the SaaS Tenant:
 - IspServiceClientId <- Service Account ID (Login Name including @Suffix)
 - IspServiceClientSecret <- Service Account Credential (Password) 
 - IspTenantId <- Identity ID (Collected From About on the Identity Administration page)   
